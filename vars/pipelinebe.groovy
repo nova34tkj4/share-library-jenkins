@@ -8,7 +8,6 @@ def call(String backendStaging) {
         remote.allowAnyHosts = true
 
         try {
-            withCredentials([string(credentialsId: 'key-github', variable: 'SSH_KEY')]) {
                 stage('Clone the repo') {
                     checkout scmGit(
                         branches: [[name: "${branch}"]], 
@@ -36,7 +35,6 @@ def call(String backendStaging) {
                         ssh ${remote.user}@${remote.host} "docker run --name ${nameservice} -p 8088:80 -d ${registry}/${nameservice}:${commit}"
                     """
                 }
-            }
         } catch (Exception e) {
             currentBuild.result = 'FAILURE'
             echo 'Build failed!'
