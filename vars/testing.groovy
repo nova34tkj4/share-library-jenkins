@@ -11,6 +11,10 @@ def call(String backendStaging) {
                 stage('Build Image') {
                     sh "echo ${nameservice}"
                 }
+            
+                stage('tes') {
+                    sh "echo hallo semuanya ${nameservice}"
+                }          
         } catch (Exception e) {
             currentBuild.result = 'FAILURE'
             echo 'Build failed!'
